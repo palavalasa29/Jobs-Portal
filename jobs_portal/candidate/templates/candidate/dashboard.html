@@ -1,0 +1,19 @@
+{% extends 'candidate/candidatebase.html' %}
+    {%block title %}
+      <title>Candidate Dashboard</title>
+    {%endblock title %}
+    {%block content %}
+      {% include 'candidate/navbar.html' %}
+      <div class="container-fluid p-4 mainbg">
+          <h2>Welcome to ypur Dasboard</h2>
+          {%for job in jobs %}
+            <div class="jobCard shadow p-3 mt-2">
+              <h6>{{job.title}}</h6>
+              <p>{{job.companyName}}</p>
+              <p>{{job.location}}</p>
+              <p>{{job.salary}}</p>
+              <a href="{%url 'apply_job' job.id %}"><button class="btn btn-primary">Apply Now</button></a>
+            </div>
+          {%endfor%}
+      </div>
+    {% endblock content %}

@@ -1,0 +1,32 @@
+{% extends 'hr/hrbase.html' %}
+
+{% block title %}
+  <title>Recruiter's Home</title>
+{% endblock title %}
+
+{%block content %}
+{% include 'hr/navbar.html' %}
+  <div class="container-fluid mainbg p-4">
+    <h2>Welcome to Your Dashboard</h2>
+    {% if jobPosts %}
+      {% for jobPost in jobPosts %}
+        <div class="job_card p-4 mb-3">
+            <h3>{{jobPost.title}}</h3>
+            <p>{{jobPost.location}}</p>
+            <p>{{jobPost.companyName}}</p>
+            <p>Apply by: {{jobPost.lastDateToApply}}</p>
+            <div class="apply-count">
+                <i class="fas fa-users"></i>
+                <span>{{jobPost.applyCount}} candidate applied</span>
+            </div>
+            <button class="btn btn-success mt-3"><a href="{% url 'candidate_details' jobPost.id %}">See Details</a></button>
+        </div>
+      {%endfor%}
+    {% else %}
+        <h3>No jobs Posted </h3>
+        <a href="{% url 'post_job' %}">Post your jobs here...</a>
+    {%endif%}
+  </div>
+{%endblock content%}
+
+

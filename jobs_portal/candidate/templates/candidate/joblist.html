@@ -1,0 +1,27 @@
+{%extends 'candidate/candidatebase.html' %}
+
+{% block title %}
+<title>Job List </title>
+{%endblock title %}
+
+{% block content%}
+    {%include 'candidate/navbar.html' %}
+    <div class="container-fluid p-4 mainbg">
+        {% if jobs %}
+            {%for myjob in jobs %}
+                <div class="p-3 mb-3 loginCard">
+                    <h6>{{myjob.job.job.title}}</h6>
+                    <h4>{{myjob.job.job.companyName}}</h4>
+                    <p>{{myjob.job.status}}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>No applied jobs to see</h3>
+            <a href="{% url 'candidate_dashboard' %}">Apply here...</a> <br />
+        {% endif %}
+        <a href="{% url 'candidate_dashboard' %}">
+            <button class="btn btn-secondary mt-3">Back</button>
+        </a>
+    </div>
+{%endblock content%}
+

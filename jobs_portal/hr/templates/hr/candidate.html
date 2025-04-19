@@ -1,0 +1,94 @@
+{% extends 'hr/hrbase.html' %}
+
+{% block title %}
+  <title>Applicants List</title>
+{% endblock title %}
+
+{% block content %}
+{% include 'hr/navbar.html' %}
+  <div class="container-fluid mainbg p-4">
+    <h2>Seeing the details of the Candidate</h2>
+    {% if applications %}
+      <table class="candidates-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Passing Year</th>
+            <th>Experience</th>
+            <th>Resume</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for application in applications %}
+          <tr>
+            <td>{{application.user.username}}</td>
+            <td>{{application.user.email}}</td>
+            <td>{{application.passingYear}}</td>
+            <td>{{application.yearOfExperience}}</td>
+            <td>
+              {% if application.resume %}
+                  <a href="{{ application.resume.url }}" class="resume-download">Download Resume</a>
+              {% else %}
+                  No Resume Uploaded
+              {% endif %}
+            </td>          
+            <td>Pending</td>
+            <td>
+                <form action="{% url 'selectCandidate' %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="candidateid" value="{{application.id}}" hidden>
+                    <input type="number" name="jobpostid" value="{{jobpost.id}}" hidden>
+                    <button class="btn btn-success" type="submit">Accept</button>
+                </form>
+                <hr>   
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table class="candidates-table">
+    {%else%}
+        <p>No Applications </p>
+    {%endif%}    
+    <h2>Selected Candidates Details</h2>
+    {% if applications %}
+    <table class="candidates-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Passing Year</th>
+          <th>Years of Experience</th>
+          <th>Resume</th>
+          <th>Status</th>  
+        </tr>
+      </thead>
+      <tbody>
+          {% for application in selected_applications %}
+          <tr>
+            <td>{{application.candidate.user.username}}</td>
+            <td>{{application.candidate.user.email}}</td>
+            <td>{{application.candidate.passingYear}}</td>
+            <td>{{application.candidate.experience}}</td>
+            <td>
+              {% if application.resume %}
+                  <a href="{{ application.resume.url }}" class="resume-download">Download Resume</a>
+              {% else %}
+                  No Resume Uploaded
+              {% endif %}
+            </td>          
+            <td>{{application.candidate.status}}</td>
+          </tr>
+          {% endfor %}
+          <!-- Add more rows for other candidates -->
+      </tbody>
+  </table>
+    {% else %}
+        <h2>No Application received</h2>
+    {% endif %}
+  </div>
+{% endblock content %}
+
+

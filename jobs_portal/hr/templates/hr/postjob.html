@@ -1,0 +1,39 @@
+{% extends 'hr/hrbase.html' %}
+
+{% block title %}
+  <title>Post Job</title>
+{% endblock title %}
+
+{%block content %}
+{% include 'hr/navbar.html' %}
+<div class="container-fluid mainbg p-4">
+    <h2>Upload new job opening</h2>
+    <div class="job_card p-3">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="jobtitle">Job Title</label>
+                <input type="text" id="jobtitle" name="jobtitle" placeholder="Enter the job title" class="form-control"></div>
+            <div class="mb-3">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" class="form-control" placeholder="Enter the location"></div>
+            <div class="mb-3">
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" name="companyName" placeholder="Enter the name of the company" class="form-control" required></div>
+            <div class="mb-3">
+                <label for="salary">Salary </label>
+                <input type="number" id="salary" name="salary" placeholder="Enter the salary" class="form-control" required></div>
+            <div class="mb-3">
+                <label for="lastDateToApply">Job Title</label>
+                <input type="date" id="lastDateToApply" name="lastDateToApply" class="form-control" required>
+            </div>
+            <button class="btn btn-success">Upload</button>
+        </form>
+    </div>
+    {% if msg %}
+    <h3 class="message">{{msg}}</h3>
+    {% endif %}
+    <a href="{% url 'hrHome' %}"><button class="btn btn-secondary mt-3">Back</button></a>
+</div>
+{%endblock content%}
+
