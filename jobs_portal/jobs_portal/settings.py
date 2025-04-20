@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-+njqzk2wb*%f4)c33uajpz3@^ic3gw6+t@cl^6j0hwf5tsu3@1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://jobs-portal-production-39be.up.railway.app/']
+ALLOWED_HOSTS = ['https://jobs-portal-production-39be.up.railway.app/',
+                 'https://jobs-portal-m0hw.onrender.com']
 
 
 # Application definition
