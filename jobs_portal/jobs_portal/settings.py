@@ -25,10 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+njqzk2wb*%f4)c33uajpz3@^ic3gw6+t@cl^6j0hwf5tsu3@1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://jobs-portal-production-39be.up.railway.app/',
-                 'https://jobs-portal-m0hw.onrender.com']
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1', ]
 
 
 # Application definition
@@ -79,13 +78,35 @@ WSGI_APPLICATION = 'jobs_portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=f'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}',
+#         conn_max_age=600,
+#         ssl_require=False
+#     )
+# }
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}',
-        conn_max_age=600,
-        ssl_require=False
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.kwilzlkmtcujncdvftdt',
+        'PASSWORD': 'J8tI9fpbQ1MzH84D',  # Replace with actual password
+        'HOST': 'aws-0-us-east-2.pooler.supabase.com',
+        'PORT': '5432',
+    }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ["PGDATABASE"],
+#         'USER': os.environ["PGUSER"],
+#         'PASSWORD': os.environ["PGPASSWORD"],
+#         'HOST': os.environ["PGHOST"],
+#         'PORT': os.environ["PGPORT"],
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
